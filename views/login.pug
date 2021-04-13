@@ -1,0 +1,19 @@
+extends layouts/login-layout.pug
+
+block content
+    form.form.sign-in(action='/login' method="POST")
+        h2 Sign in for faculty or admin
+        label 
+            span Account name
+            input(type="text" name="username")
+        label 
+            span Password
+            input(type="password" name="password")
+        button(type="submit" class="submit") sign in 
+        .social-media
+            h5 If you are a student.
+            h5 Login with google account @student.tdu.edu.vn
+            ul 
+                li
+                    a(href="/auth/google")
+                        img(src="/images/google.png")

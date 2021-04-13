@@ -1,0 +1,723 @@
+:root{
+    --blue: #1fa2f1;
+    --buttonHoverBg: #d4edff;
+    --lightGrey: rgb(230,236,240);
+    --spacing: 15px;
+    --blueLight: #9BD1F9;
+    --greyText: rgb(101,119,134);
+    --greyButtonText: rgba(0,0,0,0.34);
+    --blueBackGroung: rgba(212, 237,255,0.6)
+}
+ul{
+    text-decoration: none;
+    list-style-type: none;
+}
+*{
+    box-sizing: border-box;
+    font-family: "Segoe UI",Arial,sans-serif;
+}
+
+
+  /* Style the links inside the navigation bar */
+.topnav {
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    width:inherit;
+    width: 100%;
+    border-bottom: 0.5px solid var(--lightGrey);
+}
+.topnav a ,
+.topnav label{
+    color: inherit;
+    float: left;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 16.66%;
+    margin: 0;
+}
+
+.topnav a:hover ,
+.topnav label:hover{
+    background-color: #ddd;
+    color: black;
+}
+  
+.topnav .active{
+    background-color: var(--blue);
+}
+
+
+.main{
+    margin-top: 50px;
+}
+
+*{
+    outline: none !important;
+}
+.body{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: -webkit-linear-gradient(left, #7579ff, #b224ef);
+    font-family: 'Nunito', sans-serif;
+}
+  
+.cont input, button{
+    border:none;
+    outline: none;
+    background: none;
+}
+  
+.cont{
+    overflow: hidden;
+
+    background: #fff;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.form{
+    padding: 50px;
+    height: 100%; 
+}
+  
+.cont h2{
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+}
+  
+.cont label{
+    display: block;
+    width: 260px;
+    margin: 25px auto 0;
+    text-align: center;
+}
+  
+.cont label span{
+    font-size: 14px;
+    font-weight: 600;
+    color: #505f75;
+    text-transform: uppercase;
+}
+  
+.cont input{
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 16px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(109, 93, 93, 0.4);
+    text-align: center;
+    font-family: 'Nunito', sans-serif; 
+}
+  
+.cont button{
+    display: block;
+    margin: 0 auto;
+    width: 260px;
+    height: 36px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+  
+.cont .submit{
+    margin-top: 40px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    background: -webkit-linear-gradient(left, #7579ff, #b224ef);
+}
+  
+.cont .submit:hover{
+    background: -webkit-linear-gradient(left, #b224ef, #7579ff);
+}
+  
+.social-media{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+  
+.social-media ul{
+    list-style: none;
+    padding: 0;
+}
+  
+.social-media ul li{
+    display: inline-block;
+    cursor: pointer;
+    margin: 25px 15px;
+}
+  
+.social-media img{
+    width: 40px;
+    height: 40px;
+}
+  
+  
+.sign-in{
+    padding-top: 65px;
+}
+  
+/*end login css*/
+
+/*main css*/
+.mainContainer{
+    display: flex;
+}
+a{
+    color: inherit; 
+}
+
+
+.otherPageContainer a{
+
+    padding: 10px;
+    font-size: 30px;
+    width: 55px;
+    height: 55px;
+    align-items: center;
+    justify-content: center;
+    color: #212529
+}
+
+.otherPageContainer a.blue{
+    color: var(--blue);
+}
+
+a:hover{
+    color: inherit;
+    text-decoration: none;
+
+}
+
+.otherPageContainer a:hover{
+    background-color: var(--buttonHoverBg);
+    color: var(--blue);
+    border-radius: 50%;
+}
+.mainSectionContainer,
+.facultyContainer,
+.notificationContainer{
+    padding: var(--spacing);
+    display: flex;
+    flex-direction: column;
+}
+
+.titleContainer{
+    height: 53px;
+    padding: 0 var(--spacing);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.titleContainer h1{
+    flex: 1;
+}
+
+h1{
+    font-size: 19px;
+    font-weight: 800;
+    margin: 0;
+
+}
+
+.postFormContainer{
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.38);
+    display: flex;
+    padding: var(--spacing);
+    border: 1px solid var(--lightGrey);
+    margin-bottom: 10px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.userImageContainer {
+    margin-right: var(--spacing);
+    width: 50px;
+    height: 50px;
+}
+
+.userImageContainer img{
+    width: 100%;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.textAreaContainer{
+    flex: 1;
+    padding-left: var(--spacing);
+}
+
+.textAreaContainer textarea{
+    width: 100%;
+    border: none;
+    resize: none;
+    font-size: 19px;
+}
+
+#createPostButton{
+    text-align: left;
+    background-color: white;
+    color: var(--greyText);
+    border: none;
+    border-radius: 40px;
+    padding: 7px 15px;
+    width: 100%;
+}
+
+#createPostButton:hover{
+    background-color: var(--lightGrey);
+}
+
+/*post*/
+.post{
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.38);
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing);
+    cursor: pointer;
+    border: 1px solid var(--lightGrey);
+    margin-bottom: 20px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.mainContentContainer,
+.mainCommentContainer{
+    flex: 1;
+    display: flex;
+}
+
+
+.postContainer{
+    padding-left: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.username,
+.date{
+    color: var(--greyText)
+}
+
+.displayName{
+    font-weight: bold;
+}
+
+.reactContainer{
+    margin-top: var(--spacing);
+    display: flex;
+    align-items: center;
+}
+
+.postFooter .postButtonContainer{
+    flex:1;
+    text-align: center;
+}
+
+.postFooter .postButtonContainer button{
+    padding: 2px 7px;
+}
+
+.header{
+    display: flex;
+    margin-bottom: var(--spacing);
+}
+.header a:hover{
+    text-decoration: underline;
+}
+
+.header a,
+.header span{
+    padding-right: 5px;
+}
+
+.postButtonContainer button:hover{
+    background-color: #d4edff;
+    color: var(--blue);
+    border-radius: 10px
+}
+
+button i,
+button span{
+    pointer-events: none;
+}
+.likeButton,
+.commentButton{
+    width: 100%;
+}
+.postButtonContainer.like button.active{
+    color: red
+}
+
+.modal .postFormContainer{
+    border: none ;
+    padding: 0;
+    padding-top: var(--spacing);
+}
+
+.mainCommentContainer{
+    font-size: 90%;
+    padding: var(--spacing);
+}
+
+
+.commentContainer {
+    padding-left: var(--spacing) ;
+    padding-right: var(--spacing) ;
+    background-color: var(--lightGrey);
+    border-radius: 10px;
+    max-width: 80%;
+
+}
+
+.writeCommentContainer{
+    display: flex;
+}
+
+
+.profileHeaderContainer .coverPhotoContainer{
+    height: 180px;
+    background-color: var(--blue);
+}
+
+.profileHeaderContainer .userDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--spacing);
+}
+
+.profilePictureButton {
+    position: absolute;
+    font-size: 50px;
+    color: rgba(0,0,0,0.6);
+    display: none;
+}
+
+.userImageContainer:hover .profilePictureButton {
+    display: block;
+}
+
+.imagePreviewContainer,
+.picturePostContainer{
+    width: 100%;
+    height: 400px;
+    display: none;
+    vertical-align:top;
+    margin-top: var(--spacing);
+}
+.picturePostContainer{
+    display: inline-block;
+}
+#imagePreview,
+.picturePost{
+    width: 100%;
+    height: 100%;
+    background-color: #3e3e3e;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+/** profile page*/
+.coverImage{
+    margin-bottom: 20px;
+    background-size: cover;
+    object-fit: cover;
+    background-image: url('https://iso.500px.com/wp-content/uploads/2014/07/big-one.jpg');
+    background-repeat: no-repeat
+}
+.box{
+    background: rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    text-align: center;
+    margin: auto;
+    color: white;
+    font-family: 'Century Gothic',sans-serif;
+  }
+.box h1{
+    font-size: 40px;
+    letter-spacing: 4px;
+    font-weight: 100;
+}
+.box h5{
+    font-size: 20px;
+    letter-spacing: 3px;
+    font-weight: 100;
+}
+.box p{
+    text-align: justify;
+}
+.box table{
+    text-align: left;
+}
+
+
+
+.box li{
+    display: flex;
+    align-items: center;
+    margin: 6px;
+    list-style: none;
+}
+.box tr a{
+    color: white;
+    text-decoration: none;
+    font-size: 60px;
+    transition: all ease-in-out 250ms;
+}
+
+.box tr h3{
+    margin-left: var(--spacing);
+}
+.box tr .controlInfo a{
+    font-size: 40px;
+}
+.box tr .controlInfo:hover{
+    color: #b9b9b9;
+}
+
+.box .userImageContainer {
+    height: 132px;
+    width: 132px;
+    margin-left: var(--spacing);
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.box .userImageContainer img{
+    border: 4px solid 
+}
+
+.box .profileButton{
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 60px ;
+    display: inline-block;
+    margin-left: var(--spacing);
+}
+
+.box .profileButton:hover {
+    background-color: var(--blueBackGroung);
+}
+
+
+/*responsive navbar*/
+.card-body{
+    padding: 0;
+}
+.item-container{
+    display: flex;
+}
+.item-container img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.item-container span{
+    font-weight: bold;
+}
+.nav,
+.navPc{
+    width: 100%;
+}
+
+.nav{
+    padding: var(--spacing);
+}
+.navPc h3{
+    width: 100%;
+    padding: 24px;
+    text-align: center;
+}
+.nav-closeNotification {
+    height: 28px;
+    color: #666;
+    width: 100%;
+    margin-top: var(--spacing);
+    padding-left: var(--spacing);
+}
+
+.nav-closeFaculty{
+    height: 28px;
+    color: #666;
+    width: 100%;
+    margin-top: var(--spacing);
+    padding-right: var(--spacing);
+    text-align: right;
+}
+.navMobileFaculy{
+    left: 0;
+    transform: translateX(-100%);
+}
+.navMobileNotification{
+    right: 0;
+    transform: translateX(100%);
+}
+.navMobileFaculy,
+.navMobileNotification{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 100%;
+    background-color: white;
+    transition: all linear 0.2s;
+}
+
+.overPlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.3);
+    display: none;
+    animation: fadeIn linear 0.2s;
+}
+.navInputNotification:checked ~ .overPlay{
+    display: block;
+}
+
+.navInputFaculty:checked ~ .overPlay{
+    display: block;
+}
+.navInputNotification:checked ~ .navMobileNotification{
+    transform: translateX(0%);
+    opacity: 1;
+}
+.navInputFaculty:checked ~ .navMobileFaculy{
+    transform: translateX(0%);
+    opacity: 1;
+}
+
+/*notification*/
+.facultyContainer{
+    left: 0;
+}
+.notificationContainer{
+    right: 0;
+}
+.facultyContainer,
+.notificationContainer{
+    margin-top: 50px;
+    position: fixed;
+    top: 0;
+}
+
+.listFacultyContainer,
+.listNotificationContainer {
+    overflow-y: scroll;
+    height: 50vh;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 38%);
+    border: none;
+    padding-left: var(--spacing);
+    padding-right: var(--spacing);
+}
+.paginationContainer{
+    padding-left: var(--spacing);
+    padding-right: var(--spacing);
+}
+.listFacultyContainer::-webkit-scrollbar,
+.listNotificationContainer::-webkit-scrollbar{
+    display: none;
+}
+.card .item{
+    cursor: pointer;
+}
+
+.list-group-item  a,
+.titleContainer a{
+    color: var(--blue);
+}
+
+.list-group-item  a:hover,
+.titleContainer a:hover{
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--blue);
+}
+.page-link{
+    cursor: pointer;
+}
+.facultyContainer .list-group-item{
+    border: 1px solid white;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+/*Admin page*/
+
+
+/*mobile*/
+@media only screen and (max-width: 768px) {
+    .nav-btn{
+        display: block;
+    }
+    .mainSectionContainer {
+        width: 100%;
+    }
+    .facultyContainer{
+        width: 0%;
+    }
+    .topnav a ,
+    .topnav label{
+        width: 12.5%;
+    }
+    .topnav{
+        padding: 0;
+    }
+    .navPc{
+        display: none;
+    }
+    .listFacultyContainer{
+        height: 80vh;
+    }
+}
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+/*Pc*/
+@media only screen and (min-width: 600px) {
+    .mainSectionContainer {
+        width: 50%;
+        margin-left: 25%;
+    }
+    .facultyContainer{
+        width: 25%;
+    }
+    .notificationContainer{
+        width: 25%;
+    }
+    .nav-btn{
+        display: none;
+    }
+}
+
+
+
+
+
+
+

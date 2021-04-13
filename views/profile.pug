@@ -1,0 +1,56 @@
+extends layouts/main-layout.pug
+
+block content
+    .mainContainer
+        .titleContainer 
+            h1 #{pageTitle}
+    if !profileUser
+        h1 User not found
+    else
+        .coverImage
+            .box
+                .userImageContainer
+                    img(src=profileUser.profilePic, alt="")
+                    if profileUser._id == userLoggedIn._id
+                        button.profilePictureButton(data-toggle="modal" data-target="#imageProfileModal")
+                            i.fas.fa-camera
+                if profileUser._id != userLoggedIn.id
+                    a.profileButton(href=`/message/${profileUser._id}`)
+                        i.fas.fa-envelope
+                table 
+                    tr 
+                        td 
+                            a.fas.fa-signature(aria-hidden="true")
+                        td 
+                            h3#profileName #{profileUser.displayName}
+                        td 
+                            if profileUser._id == userLoggedIn.id
+                                .controlInfo#editName(data-id= userLoggedIn.id)
+                                    a.fas.fa-pen-square
+                    tr 
+                        td 
+                            a.fas.fa-graduation-cap(aria-hidden="true")
+                        td 
+                            if !profileUser.class
+                                h3#profileClass You do not belong to any class
+                            else 
+                                h3#profileClass #{profileUser.class}
+                        td 
+                            if profileUser._id == userLoggedIn.id
+                                .controlInfo#editName(data-id= userLoggedIn.id)
+                                    a.fas.fa-pen-square
+                    tr 
+                        td 
+                            a.fas.fa-building(aria-hidden="true")
+                        td 
+                            if !profileUser.falcuty
+                                h3#profileFalcuty You do not belong to any falcuty
+                            else 
+                                h3#profileFalcuty #{profileUser.faculty}
+                        td 
+                            if profileUser._id == userLoggedIn.id
+                                .controlInfo#editName(data-id= userLoggedIn.id)
+                                    a.fas.fa-pen-square
+        +createImageProfile
+block scripts
+    script(src="/js/profile.js") 

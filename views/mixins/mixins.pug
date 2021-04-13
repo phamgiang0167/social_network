@@ -1,0 +1,199 @@
+
+
+mixin createPostForm(userLoggedIn)
+    .postFormContainer
+        .userImageContainer
+            img(src=userLoggedIn.profilePic, alt="User's profile picture")
+        button#createPostButton(data-toggle="modal" data-target="#contentPostModal") Write something new here
+    h1.titleContainer Time Lines
+
+mixin commentModal(userLoggedIn)
+    #commentModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='commentModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#commentModal.modal-title Reply
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    .postFormContainer
+                        .userImageContainer
+                            img(src=userLoggedIn.profilePic, alt="User's profile picture")
+                        .textAreaContainer
+                            textarea#commentTextArea(placeholder="what's happening?")
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button#submitCommentButton.btn.btn-primary(type='button', disabled="") Reply
+
+mixin createImageProfile()
+    #imageProfileModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='imageProfileModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#imageProfileModal.modal-title Change a new picture
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    input#userPhoto(type="file" name="userPhoto")
+                    .imagePreviewContainer
+                        img#imagePreview
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button#imageProfileButton.btn.btn-primary(type='button' disabled) Save
+
+mixin createPostContent()   
+
+    #contentPostModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#contentPostModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#contentPostModal.modal-title Post
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    .textAreaContainer
+                        textarea#postTextArea(placeholder="what's happening?")
+                    input#postPhoto(type="file" name="userPhoto")
+                    .imagePreviewContainer
+                        img#imagePreview
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button#submitPostButton.btn.btn-primary(type='button' ,disabled="") Save
+
+mixin chooseAccess()
+    #chooseAccessModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#chooseAccessModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#chooseAccessModal.modal-title choose accessibility
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    .checkBoxContainer 
+                        .form-check 
+                            label.form-check-label(for="check1")
+                                input.form-check-input(type="checkbox" id="check1" name="option1" value="Phòng công tác học sinh sinh viên")
+                                |Phòng công tác học sinh sinh viên
+                        .form-check 
+                            label.form-check-label(for="check2")
+                                input.form-check-input(type="checkbox" id="check2" name="option2" value="Phòng Đại học")
+                                |Phòng Đại học
+                        .form-check 
+                            label.form-check-label(for="check3")
+                                input.form-check-input(type="checkbox" id="check3" name="option3" value="Phòng Sau đại học")
+                                |Phòng Sau đại học
+                        .form-check 
+                            label.form-check-label(for="check4")
+                                input.form-check-input(type="checkbox" id="check4" name="option4" value="Phòng điện toán và máy tính")
+                                |Phòng điện toán và máy tính
+                        .form-check 
+                            label.form-check-label(for="check5")
+                                input.form-check-input(type="checkbox" id="check5" name="option5" value="Phòng khảo thí và kiểm định chất lượng")
+                                |Phòng khảo thí và kiểm định chất lượng
+                        .form-check 
+                            label.form-check-label(for="check6")
+                                input.form-check-input(type="checkbox" id="check6" name="option6" value="Phòng tài chính")
+                                |Phòng tài chính
+                        .form-check 
+                            label.form-check-label(for="check7")
+                                input.form-check-input(type="checkbox" id="check7" name="option7" value="TDT Creative Language Center")
+                                |TDT Creative Language Center
+                        .form-check 
+                            label.form-check-label(for="check8")
+                                input.form-check-input(type="checkbox" id="check8" name="option8" value="Trung tâm tin học")
+                                |Trung tâm tin học
+                        .form-check 
+                            label.form-check-label(for="check9")
+                                input.form-check-input(type="checkbox" id="check9" name="option9" value="Trung tâm đào tạo phát triển xã hội (SDTC)")
+                                | Trung tâm đào tạo phát triển xã hội (SDTC)
+                        .form-check 
+                            label.form-check-label(for="check10")
+                                input.form-check-input(type="checkbox" id="check10" name="option10" value="Trung tâm phát triển Khoa học quản lý và Ứng dụng công nghệ (ATEM)")
+                                |Trung tâm phát triển Khoa học quản lý và Ứng dụng công nghệ (ATEM)
+                        .form-check 
+                            label.form-check-label(for="check11")
+                                input.form-check-input(type="checkbox" id="check11" name="option11" value="Trung tâm hợp tác doanh nghiệp và cựu sinh viên")
+                                |Trung tâm hợp tác doanh nghiệp và cựu sinh viên
+                        .form-check 
+                            label.form-check-label(for="check12")
+                                input.form-check-input(type="checkbox" id="check12" name="option12" value="Khoa Luật")
+                                |Khoa Luật
+                        .form-check 
+                            label.form-check-label(for="check13")
+                                input.form-check-input(type="checkbox" id="check13" name="option13" value="Trung tâm ngoại ngữ - tin học – bồi dưỡng văn hóa")
+                                |Trung tâm ngoại ngữ - tin học – bồi dưỡng văn hóa
+                        .form-check 
+                            label.form-check-label(for="check14")
+                                input.form-check-input(type="checkbox" id="check14" name="option14" value="Viện chính sách kinh tế và kinh doanh")
+                                |Viện chính sách kinh tế và kinh doanh
+                        .form-check 
+                            label.form-check-label(for="check15")
+                                input.form-check-input(type="checkbox" id="check15" name="option15" value="Khoa Mỹ thuật công nghiệp")
+                                |Khoa Mỹ thuật công nghiệp
+                        .form-check 
+                            label.form-check-label(for="check16")
+                                input.form-check-input(type="checkbox" id="check16" name="option16" value="Khoa Điện – Điện tử")
+                                |Khoa Điện – Điện tử
+                        .form-check 
+                            label.form-check-label(for="check17")
+                                input.form-check-input(type="checkbox" id="check17" name="option17" value="Khoa Công nghệ thông tin")
+                                |Khoa Công nghệ thông tin
+                        .form-check 
+                            label.form-check-label(for="check18")
+                                input.form-check-input(type="checkbox" id="check18" name="option18" value="Khoa Quản trị kinh doanh")
+                                |Khoa Quản trị kinh doanh
+                        .form-check 
+                            label.form-check-label(for="check19")
+                                input.form-check-input(type="checkbox" id="check19" name="option19" value="Khoa Môi trường và bảo hộ lao động")
+                                |Khoa Môi trường và bảo hộ lao động
+                        .form-check 
+                            label.form-check-label(for="check20")
+                                input.form-check-input(type="checkbox" id="check20" name="option20" value="Khoa Lao động công đoàn")
+                                |Khoa Lao động công đoàn
+                        .form-check 
+                            label.form-check-label(for="check21")
+                                input.form-check-input(type="checkbox" id="check21" name="option21" value="Khoa Tài chính ngân hàng")
+                                |Khoa Tài chính ngân hàng
+                        .form-check 
+                            label.form-check-label(for="check22")
+                                input.form-check-input(type="checkbox" id="check22" name="option22" value="Khoa giáo dục quốc tế")
+                                |Khoa giáo dục quốc tế
+                        
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button#chooseAccessButton.btn.btn-primary(type='button' data-id="") Update
+
+mixin createAccount()
+    #createAccountModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#createAccountModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#createAccountModal.modal-title Create a new account
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    .wrapper
+                        input#name(type="text", name="displayName", placeholder="name", value="" required="")
+                        input#username(type="text", name="username", placeholder="Username", value="" required="")
+                        input#password(type="password", name="password", placeholder="Password", required="")
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button#createAccountButton.btn.btn-primary(type='button' ) Register
+
+mixin createNotification()
+    #createNotificationModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#createNotificationModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#createNotificationModal.modal-title Create a notification
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    .wrapper
+                        input#titleNotification(type="text", name="displayName", placeholder="Title", value="" required="")
+                        textarea#contentNotification( cols="30", rows="10" type="text" name="content", placeholder="Content", value="" required="")
+                        select#access(name='access')
+                            
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button#createNotificationButton.btn.btn-primary(type='button' ) Post

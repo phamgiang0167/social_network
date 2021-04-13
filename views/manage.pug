@@ -1,0 +1,37 @@
+extends layouts/admin-layout.pug
+
+block content
+    if userLoggedIn.role == 'admin'
+        .row.align-items-center.py-5
+            h3
+                | Admin page
+        .btn-group.my-3
+            button.btn.btn-light.border(type='button' data-toggle="modal" data-target="#createAccountModal" )
+                i.fas.fa-folder-plus
+                |  New Account
+        table.table.table-hover.border#accountTable
+            thead
+                th office
+                th account
+                th access
+                th Actions
+            tbody
+    if userLoggedIn.role == 'office'
+        .row.align-items-center.py-5
+            h3
+                #{userLoggedIn.displayName}
+        .btn-group.my-3
+            button.btn.btn-light.border(type='button' data-toggle="modal" data-target="#createNotificationModal" )
+                i.fas.fa-folder-plus
+                |  Post a notification
+        table.table.table-hover.border#notificationTable
+            thead
+                th Title
+                th Category
+                th Date
+                th Actions
+            tbody
+    +chooseAccess()
+    +createAccount()
+    +createNotification()
+            
