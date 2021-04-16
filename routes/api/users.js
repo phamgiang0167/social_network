@@ -53,4 +53,15 @@ router.get('/office', async (req, res)=>{
     var results = await User.find({role: 'office'})
     return res.status(200).send(results)
 })
+
+router.get('/', async (req, res) =>{
+    var searchObj = req.query
+    if(req.query.keyword != undefined && req.query.keyword != ""){
+        searchObj = {
+            displayName: {$regex: req.query.keyword, $options: 'i'}
+        }
+    }
+    var user = await User.find(searchObj)
+    return res.send(user)
+})
 module.exports = router

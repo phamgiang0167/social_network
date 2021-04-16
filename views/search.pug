@@ -1,0 +1,10 @@
+extends layouts/main-layout.pug
+
+block content
+    .searchContainer 
+        i.fas.fa-search
+        input#searchBox(type="text", name="searchBox", data-search=selectedTab, placeholder="Search for users or posts")
+
+    .resultsContainer
+block scripts
+     script(src="javascripts/search.js") 

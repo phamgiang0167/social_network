@@ -163,6 +163,8 @@ mixin chooseAccess()
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                     button#chooseAccessButton.btn.btn-primary(type='button' data-id="") Update
 
+
+
 mixin createAccount()
     #createAccountModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#createAccountModalLabel', aria-hidden='true')
         .modal-dialog(role='document')
@@ -180,7 +182,7 @@ mixin createAccount()
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                     button#createAccountButton.btn.btn-primary(type='button' ) Register
 
-mixin createNotification()
+mixin createNotification() 
     #createNotificationModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#createNotificationModalLabel', aria-hidden='true')
         .modal-dialog(role='document')
             .modal-content
@@ -197,3 +199,8 @@ mixin createNotification()
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                     button#createNotificationButton.btn.btn-primary(type='button' ) Post
+
+mixin createTab(name, href, isSelected)
+    - className = isSelected ? "tab active" : "tab"
+    a(href=href, class=className)
+        span #{name}

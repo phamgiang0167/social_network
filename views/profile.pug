@@ -11,7 +11,7 @@ block content
             .box
                 .userImageContainer
                     img(src=profileUser.profilePic, alt="")
-                    if profileUser._id == userLoggedIn._id
+                    if profileUser._id == userLoggedIn.id
                         button.profilePictureButton(data-toggle="modal" data-target="#imageProfileModal")
                             i.fas.fa-camera
                 if profileUser._id != userLoggedIn.id
@@ -53,4 +53,4 @@ block content
                                     a.fas.fa-pen-square
         +createImageProfile
 block scripts
-    script(src="/js/profile.js") 
+    script(src="/javascripts/profile.js") 
