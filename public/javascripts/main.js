@@ -83,7 +83,7 @@ function createPostHtml(postData){
     var postedBy = postData.postedBy
     // console.log(postedBy)
     // console.log(userLoggedIn)
-    var displayName =  postedBy._id == userLoggedIn._id ?  'You' : postData.postedBy.displayName 
+    var displayName = postData.postedBy._id == userLoggedIn._id ?  "You": postData.postedBy.displayName
     var timestamp = timeDifference(new Date(), new Date(postData.createdAt))
     var likeButtonActiveClass = postData.likes.includes(userLoggedIn._id) ? 'active' : ''
     var myOwnPost = postData.postedBy._id == userLoggedIn._id ?  "block":"none"
