@@ -13,6 +13,11 @@ router.post('/', async (req, res)=>{
     await Notification(req.body).save()
     return res.status(200).send()
 })
+
+router.get('/office/:id', async (req, res)=>{
+    var results = await Notification.find({postedBy: req.params.id})
+    return res.status(200).send(results)
+})
 // router.post('/:page', async (req, res)=>{
 //     var perPage = 3
 //     var page = req.params.page || 1

@@ -25,7 +25,7 @@ $(document).ready(()=>{
                 var cell2 = row.insertCell(1)
                 var cell3 = row.insertCell(2)
                 var cell4 = row.insertCell(3)
-                cell1.innerHTML = `<a href="#">${element.title}</a>`
+                cell1.innerHTML = `<a href="/${element._id}">${element.title}</a>`
                 cell2.innerHTML = element.category
                 cell3.innerHTML = element.createdAt
                 cell4.innerHTML = `<span><i class="fas fa-user-slash"></i>&nbsp&nbsp</span><span><i class="fas fa-user-edit"></i></span>`
@@ -147,6 +147,7 @@ $('#createNotificationButton').on('click', e=>{
         type: "POST",
         data: data,
         success: ()=>{
+            location.reload()
             $("#createNotificationModal").modal('hide')
         }
     })
