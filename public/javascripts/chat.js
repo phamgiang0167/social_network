@@ -4,8 +4,17 @@ $("#userSearchTextbox").keydown((event) => {
     clearTimeout(timer);
     var textbox = $(event.target);
     var value = textbox.val();
-    if(value == "" && event.keycode == 8){
-        return
+    if (value == "" && (event.which == 8 || event.keyCode == 8)) {
+        // remove user from selection
+        selectedUsers.pop();
+        updateSelectedUsersHtml();
+        $(".resultsContainer").html("");
+
+        if(selectedUsers.length == 0) {
+            $("#createChatButton").prop("disabled", true);
+        }
+
+        return;
     }
     timer = setTimeout(() => {
         value = textbox.val().trim();
@@ -44,13 +53,10 @@ function createFoundUser(user, index){
                 <img src='${user.profilePic}'>
             </div>
             <div style="display:flex; flex-direction:column">
-                <a href='/profile/${user.username}' class='displayName'>${user.displayName}</a>
+                <p class='displayName'>${user.displayName}</p>
                 <a class="chat" href= "/message/${user._id}">
                     <i class="fas fa-envelope"></i>    
                 </a>
-            </div>
-            <div>
-                <a class="addChatButton">them</a>
             </div>
         </div>
     `
