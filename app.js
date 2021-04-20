@@ -37,7 +37,7 @@ const commentApiRoute = require('./routes/api/comment')
 const userApiRoute = require('./routes/api/users');
 const officeApiRoute = require('./routes/api/office')
 const notificationRoute = require('./routes/api/notification')
-
+const chatApiRoute = require('./routes/api/chat')
 app.use("/auth", authLoginRoute);
 app.use('/register', registerRoute);
 app.use('/logout', logoutRoute)
@@ -53,6 +53,7 @@ app.use('/api/comment', commentApiRoute)
 app.use('/api/users', userApiRoute)
 app.use('/api/office', officeApiRoute)
 app.use('/api/notification', notificationRoute)
+app.use('/api/chats', chatApiRoute)
 app.get("/", middleware.requireLogin, (req, res, next) => {
     var payload = {
         pageTitle: "Home",
