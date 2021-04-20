@@ -75,10 +75,10 @@ html(lang="en")
                                             
                                                 
                 .mainSectionContainer
-                    .mainContainer
-                        .titleContainer 
-                            h1 #{pageTitle}
-                            block headerButton
+                    
+                    .titleContainer 
+                        h1 #{pageTitle}
+                        block headerButton
                     block content
                 .notificationContainer
                     .navPc
@@ -88,7 +88,9 @@ html(lang="en")
                                 a.viewAll view all
                         .listNotificationContainer
                             .list-group.listNotification
-                                
+                        .paginationContainer
+                            nav.mx-auto 
+                                ul.pagination    
                     input.navInputNotification#navCheckNotification(type="checkbox" hidden)
                     label.overPlay(for="navCheckNotification")
                     .navMobileNotification
@@ -97,9 +99,9 @@ html(lang="en")
                         .titleContainer
                             h1 Notification
                         .list-group.listNotification
-                    .paginationContainer
-                        nav.mx-auto 
-                            ul.pagination
+                        .paginationContainer
+                            nav.mx-auto 
+                                ul.pagination
                                 
                                 
                         

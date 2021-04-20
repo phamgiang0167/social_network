@@ -36,8 +36,9 @@ const postApiRoute = require('./routes/api/post')
 const commentApiRoute = require('./routes/api/comment')
 const userApiRoute = require('./routes/api/users');
 const officeApiRoute = require('./routes/api/office')
-const notificationRoute = require('./routes/api/notification')
+const notificationApiRoute = require('./routes/api/notification')
 const chatApiRoute = require('./routes/api/chat')
+const messageApiRoute = require('./routes/api/message')
 app.use("/auth", authLoginRoute);
 app.use('/register', registerRoute);
 app.use('/logout', logoutRoute)
@@ -52,8 +53,9 @@ app.use('/api/post', postApiRoute)
 app.use('/api/comment', commentApiRoute)
 app.use('/api/users', userApiRoute)
 app.use('/api/office', officeApiRoute)
-app.use('/api/notification', notificationRoute)
+app.use('/api/notification', notificationApiRoute)
 app.use('/api/chats', chatApiRoute)
+app.use('/api/messages', messageApiRoute)
 app.get("/", middleware.requireLogin, (req, res, next) => {
     var payload = {
         pageTitle: "Home",

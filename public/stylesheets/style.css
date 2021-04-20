@@ -290,10 +290,12 @@ h1{
     flex-shrink: 0;
 }
 
+
 .mainContentContainer,
 .mainCommentContainer{
     flex: 1;
     display: flex;
+   
 }
 
 
@@ -725,10 +727,10 @@ button span{
     flex-direction: column;
     min-height: 0;
     flex: 1;
-    flex-basis: 0;
 }
 
 .chatTitleBar {
+    border-bottom: 1px solid var(--lightGrey);
     display: flex;
     align-items: center;
     min-height: 60px;
@@ -759,28 +761,15 @@ button span{
     background-color: var(--lightGrey);
     color: var(--greyText);
 }
-#createChatButton {
-    border: none;
-    background-color: var(--blue);
-    color: #fff;
-    padding: 7px 20px;
-    margin: 10px auto;
-    border-radius: 40px;
-}
 
-#createChatButton:disabled {
-    background-color: var(--lightGrey);
-    color: var(--greyText);
-}
-
-
-.selectedUser{
-    background-color: var(--blueBackGroung);
-    font-weight: bold;
-    color: var(--blueLight);
-    border-radius: 4px;
-    margin: 5px;
+.selectedUser {
+    font-weight: 300;
+    background-color: #CBE5FE;
+    color: #0084ff;
     padding: 5px;
+    border-radius: 3px;
+    margin: 5px 5px 0 0;
+    display: inline-block;
 }
 
 .resultListItem {
@@ -789,7 +778,6 @@ button span{
     align-items: center;
     flex-shrink: 0;
     border-bottom: 1px solid var(--lightGrey);
-    border-top: 1px solid var(--lightGrey);
 }
 
 .resultListItem:hover {
@@ -862,7 +850,7 @@ button span{
 
 #chatName:hover {
     border: 1px solid var(--lightGrey);
-    cursor: pointer;
+    cursor: text;
 }
 
 .chatContainer {
@@ -870,6 +858,7 @@ button span{
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
+    height: 60vh;
 }
 
 .chatContainer .footer {
@@ -892,7 +881,6 @@ button span{
     background-color: transparent;
     color: var(--blue);
     font-size: 24px;
-
 }
 
 .chatMessages {
@@ -901,8 +889,9 @@ button span{
     flex-direction: column;
     overflow-y: auto;
     padding: var(--spacing);
-    height: 50vh
+     -ms-overflow-style: none; 
 }
+.chatMessages::-webkit-scrollbar { width: 0 !important }
 
 .chatImagesContainer {
     display: flex;
@@ -1056,6 +1045,10 @@ button span{
 
 .resultListItem.active {
     background-color: var(--blueBackground);
+}
+
+.resultListItem.notification * {
+    pointer-events: none;
 }
 /*mobile*/
 @media only screen and (max-width: 768px) {
