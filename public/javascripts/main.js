@@ -325,7 +325,25 @@ function fpagination(data, data_id){
     }
 }
 
+function getChatName(chatData){
+    var chatName = chatData.chatName
+    if(!chatName){
+        var ortherChatUsers = getOtherChatUsers(chatData.users)
+        var namesArray = ortherChatUsers.map(user => user.displayName)
+        chatName = namesArray.join(", ")    
+    }
 
+    return chatName
+}
+
+function getOtherChatUsers(users){
+    if(users.length == 1){
+        return users
+    }
+    return users.filter((user)=>{
+        return user._id != userLoggedIn._id
+    })
+}
 
 
 

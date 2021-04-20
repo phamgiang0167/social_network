@@ -1,5 +1,7 @@
 var selectedUsers = []
 var timer
+
+
 $("#userSearchTextbox").keydown((event) => {
     clearTimeout(timer);
     var textbox = $(event.target);
@@ -28,8 +30,13 @@ $("#userSearchTextbox").keydown((event) => {
                 $('.resultsContainer').html('')
                 var index = 0
                 results.forEach(element => {
-                    console.log(selectedUsers.includes(element))
-                    if(userLoggedIn._id == element._id || selectedUsers.includes(element)){
+                    // console.log(element)
+                    for(var i = 0; i < selectedUsers.length; i++){
+                        if(selectedUsers[i]._id == element._id){
+                            return
+                        }
+                    }
+                    if(userLoggedIn._id == element._id){
                         return
                     }
                     var html = createFoundUser(element, index)
@@ -87,3 +94,13 @@ function updateSelectedUsersHtml() {
     $("#selectedUsers").prepend(elements);
 }
 
+$('#createChatButton').on('click', (event) =>{
+    var data = JSON.stringify(selectedUsers);
+
+    $.post("/api/chats", { users: data }, chat => {
+
+        if(!chat || !chat._id) return alert("Invalid response from server.");
+
+        window.location.href = `/messages/${chat._id}`;
+    })
+})
