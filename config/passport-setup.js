@@ -36,7 +36,7 @@ passport.use(new LocalStrategy(
 passport.use(new GoogleStrategy({
     clientID:  key.google.clientID,
     clientSecret: key.google.client_secret,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "https://socialnetworktdtu.herokuapp.com//auth/google/callback"
   },
   function(token, tokenSecret, profile, done) {
     if(profile._json.hd != 'student.tdtu.edu.vn'){
