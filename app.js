@@ -9,6 +9,8 @@ const session = require("express-session")
 const server = app.listen(port, () => console.log("Server listening on port " + port));
 const passportSetup = require('./config/passport-setup')
 const passport = require('passport')
+const io = require('socket.io')(server, {pingTimeout: 60000})
+//set view engine
 app.set("view engine", "pug");
 app.set("views", "views");
 
@@ -38,7 +40,9 @@ const userApiRoute = require('./routes/api/users');
 const officeApiRoute = require('./routes/api/office')
 const notificationApiRoute = require('./routes/api/notification')
 const chatApiRoute = require('./routes/api/chat')
-const messageApiRoute = require('./routes/api/message')
+const messageApiRoute = require('./routes/api/message');
+const router = require('./routes/registerRoutes');
+const { connect } = require('./database');
 app.use("/auth", authLoginRoute);
 app.use('/register', registerRoute);
 app.use('/logout', logoutRoute)
@@ -73,4 +77,26 @@ app.get('/manage',  (req, res)=>{
     res.status(200).render('manage', payload)
 })
 
-
+io.on('connection', (socket)=>{
+    socket.on('setup', userData =>{
+        socket.join(userData._id)
+        socket.emit('connected')
+    })
+    socket.on('join room', room =>{
+        socket.join(room)
+    })
+    socket.on('typing', room => {
+        socket.in(room).emit('typing')
+    })
+    socket.on('stop typing', room => {
+        socket.in(room).emit('stop typing')
+    })
+    socket.on('new message', newMessage =>{
+        var chat = newMessage.chat
+        if(!chat.users) return console.log('user not defined')
+        chat.users.forEach(user => {
+            if(user._id == newMessage.sender._id) return
+            socket.in(user._id).emit('message recieved', newMessage)
+        });
+    })
+})

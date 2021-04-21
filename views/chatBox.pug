@@ -12,9 +12,9 @@ block content
                 span#chatName(data-toggle="modal", data-target="#chatNameModal")
             
             .mainContentContainer
-                //- .loadingSpinnerContainer
-                //-     img(src="/images/loadingSpinner.gif", alt="Loading spinner")
-                .chatContainer(style="", data-room=chat._id)
+                .loadingSpinnerContainer
+                    img(src="/images/loadingSpinner.gif", alt="Loading spinner")
+                .chatContainer(style="visibility: hidden", data-room=chat._id)
                     ul.chatMessages
 
                     .typingDots

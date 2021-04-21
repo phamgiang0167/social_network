@@ -345,8 +345,13 @@ function getOtherChatUsers(users){
     })
 }
 
+function messageRecieved(newMessage){
+    if($('.chatContainer').length == 0){
 
-
+    }else{
+        addChatMessageHtml(newMessage)
+    }
+}
 
 
 
