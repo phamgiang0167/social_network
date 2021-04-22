@@ -1,6 +1,6 @@
 var connected = false
 
-var socket = io('https://localhost:3000')
+var socket = io('https://socialnetworktdtu.herokuapp.com')
 
 socket.emit('setup', userLoggedIn)
 
