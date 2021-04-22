@@ -113,12 +113,12 @@ function createPostHtml(postData){
                                 
                             </div>
                             <div class='postBody'>
-                                <div>${content}</div>
+                                <div class="content">${content}</div>
                                 <div class="picturePostContainer" style="display: ${isImageExist}">
                                     <div class="picturePost" style="background-image: url(${postData.image})"></div>
                                 </div>
                                 <div class="videoPostContainer" style="display: ${codeYoutube[0]}">
-                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/${codeYoutube[1]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+                                   ${addVideoHtml(codeYoutube[1])}
                                 </div>
                             </div>
                             <div class='postFooter'>
@@ -146,7 +146,7 @@ function createPostHtml(postData){
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                     <button class="dropdown-item deletePost" type="button">Delete</button>
-                                    <button class="dropdown-item editPost" type="button" data-toggle="modal" data-target="#contentPostModal">Edit</button>
+                                    <button class="dropdown-item editPost" type="button" data-toggle="modal" data-id=${postData._id} data-target="#editPostContentModal">Edit</button>
                                 </div>
                             </div>
                         </div>
@@ -235,35 +235,6 @@ $(document).on('click', '.item-office, .page-link', e =>{
         }
     })
 })
-// $('.viewAll').on('click', e=>{
-//     var button = e.target
-//     var data_id = ""
-//     pagination = $(button).data('page')
-//     $.ajax({
-//         url: '/api/notification/' + `${pagination}`,
-//         type: "GET",
-//         success: (data)=>{
-//             swal("Success", "Selected ", "success");
-//             $('.listNotification').html('')
-//             $('.pagination').html('')
-//             data.listNoti.forEach(e=>{
-//                 // render list notification
-//                 $('.listNotification').append(`
-//                     <div class='list-group'>
-//                         <div class='list-group-item'>
-//                             <div class='category'><i>[${e.category}]</i></div>
-//                             <div class='title'><a href="/notification/${e._id}" target="_blank">${e.title}</a></div>
-//                             <div class='owner'><small>- posted by ${data.user.displayName}</small></div>
-//                         </div>
-//                     </div>
-//                 `)
-                
-                
-//             })
-//             fpagination(data, data_id)        
-//         }
-//     })
-// })
 function fpagination(data, data_id){
     if(data.pages > 0){
         if(data.currentPage == 1){
@@ -353,6 +324,8 @@ function messageRecieved(newMessage){
     }
 }
 
-
+function addVideoHtml(codeYoutube){
+    return `<iframe width="100%" height="315" src="https://www.youtube.com/embed/${codeYoutube}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>`
+}
 
 

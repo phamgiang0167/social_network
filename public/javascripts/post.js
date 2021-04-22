@@ -58,7 +58,6 @@ $('#postPhoto').change(function(){
             if(cropper !== undefined){
                 cropper.destroy()
             }
-
             cropper = new Cropper(image, {
                 aspectRatio: 482/400,
                 background: false
@@ -112,6 +111,88 @@ $('#submitPostButton').click(()=>{
     }
 })
 
+//edit post
+
+$('#editPostContentPostPhoto').change(function(){
+    if(this.files && this.files[0]){
+        var reader = new FileReader()
+        reader.onload = (e)=>{
+            var image = document.getElementById('imagePreview')
+            image.src = e.target.result
+            $('.imagePreviewContainer').attr('style', 'display:inline-block')
+            $('#editPostContentImagePreview').attr('src', e.target.result)
+            if(cropper !== undefined){
+                cropper.destroy()
+            }
+            cropper = new Cropper(image, {
+                aspectRatio: 482/400,
+                background: false
+            })
+        }
+        reader.readAsDataURL(this.files[0])
+    }
+
+})
+
+$('#submitEditPostButton').click(()=>{
+    var button = event.target
+    var postId = $(button).data('id')
+    var textbox =$("#editPostContentTextArea")
+    var data = {
+        postId: postId,
+        content: textbox.val()
+    }
+    if(cropper == undefined){
+        $.post('/api/post/', data, (postData, status, xhr)=>{
+            console.log(postData)
+            $('#editPostContentModal').modal('hide')
+            swal("Edit successfully")
+            var post = $(`#${postId}`)
+            var codeYoutube
+            var content = postData.content
+            if(postData.content.search('https://www.youtube.com/') != (-1)){
+                codeYoutube = postData.content.split("https://www.youtube.com/watch?v=")[1].split(' ')[0]
+                content = content.replace('https://www.youtube.com/watch?v=' + codeYoutube,'')
+            }
+            post.find('.content').html(`${content}`)
+            var htmlYoutube = addVideoHtml(codeYoutube)
+            post.find('.videoPostContainer').html(htmlYoutube)
+        })
+    }else{
+        $.post('/api/post', data, (postData, status, xhr)=>{
+            var canvas = cropper.getCroppedCanvas()
+            canvas.toBlob((blob)=>{
+                var formData = new FormData()
+                formData.append('cropped', blob)
+                $.ajax({
+                    url: "/api/post/uploads/" + postData._id,
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: (updated)=>{
+                        $('#contentPostModal').modal('hide')
+                        swal("Profile image changed successfully")
+                        var html = createPostHtml(updated)
+                        $('.postsContainer').prepend(html)
+                        textbox.val('')
+                        button.prop('disabled', true)
+                        cropper = undefined
+                    }
+                })
+            })
+        })
+    }
+})
+
+
+
+
+
+
+
+
+
 //like handler
 $(document).on('click', '.likeButton', ()=>{
     var button = $(event.target)
@@ -143,7 +224,12 @@ $("#commentModal").on("show.bs.modal", (event) => {
     $("#submitCommentButton").data("id", postId);
     
 })
-
+$("#editPostContentModal").on("show.bs.modal", (event) => {
+    var button = $(event.relatedTarget);
+    var postId = getPostID(button);
+    $("#submitEditPostButton").data("id", postId);
+    
+})
 //submit a commnet
 $('#submitCommentButton').click((event)=>{
     var button = $(event.target)

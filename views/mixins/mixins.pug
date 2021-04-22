@@ -42,7 +42,6 @@ mixin createImageProfile()
                     button#imageProfileButton.btn.btn-primary(type='button' disabled) Save
 
 mixin createPostContent()   
-
     #contentPostModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#contentPostModalLabel', aria-hidden='true')
         .modal-dialog(role='document')
             .modal-content
@@ -59,6 +58,24 @@ mixin createPostContent()
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                     button#submitPostButton.btn.btn-primary(type='button' ,disabled="") Save
+
+mixin editPostContent()   
+    #editPostContentModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#editPostContentModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#editPostContentModal.modal-title Edit this post
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    .textAreaContainer
+                        textarea#editPostContentTextArea(placeholder="what's happening?")
+                    input#editPostContentPostPhoto(type="file" name="userPhoto")
+                    .imagePreviewContainer
+                        img#editPostContentImagePreview
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button#submitEditPostButton.btn.btn-primary(type='button') Edit
 
 mixin chooseAccess()
     #chooseAccessModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#chooseAccessModalLabel', aria-hidden='true')
@@ -162,8 +179,6 @@ mixin chooseAccess()
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                     button#chooseAccessButton.btn.btn-primary(type='button' data-id="") Update
-
-
 
 mixin createAccount()
     #createAccountModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#createAccountModalLabel', aria-hidden='true')

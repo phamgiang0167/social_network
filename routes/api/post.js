@@ -23,20 +23,21 @@ router.post("/", async (req, res, next) => {
         console.log("Content param not sent with request");
         return res.sendStatus(400);
     }
-
-    var postData = {
-        content: req.body.content,
-        postedBy: req.user
+    var newPost
+    if(req.body.postId){
+        await Post.findByIdAndUpdate(req.body.postId, {content: req.body.content})
+        newPost = await Post.findOne({_id: req.body.postId})
+    }else{
+        var postData = postData = {
+            content: req.body.content,
+            postedBy: req.user
+        }
+        newPost = await Post.create(postData)
+        
     }
-    Post.create(postData)
-    .then(async newPost => {
-        newPost = await User.populate(newPost, { path: "postedBy" })
-        res.status(201).send(newPost);
-    })
-    .catch(error => {
-        console.log(error);
-        res.sendStatus(400);
-    })
+    newPost = await User.populate(newPost, { path: "postedBy" })
+    res.status(201).send(newPost);
+    
 })
 router.post("/uploads/:id",upload.single('cropped'), async (req, res, next) => {
     if(!req.file) {
@@ -98,7 +99,9 @@ router.post("/comment", async (req, res, next) => {
     })
 
 })
-
+router.put('/:id', async (req, res, next)=>{
+    console.log('here')
+} )
 router.get("/:id", async (req, res, next) => {
     var postId = req.params.id
 
