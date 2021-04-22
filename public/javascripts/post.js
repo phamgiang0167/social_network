@@ -60,12 +60,13 @@ $('#postPhoto').change(function(){
             }
 
             cropper = new Cropper(image, {
-                aspectRatio: 1/1,
+                aspectRatio: 482/400,
                 background: false
             })
         }
         reader.readAsDataURL(this.files[0])
     }
+
 })
 
 //submit post
@@ -103,6 +104,7 @@ $('#submitPostButton').click(()=>{
                         $('.postsContainer').prepend(html)
                         textbox.val('')
                         button.prop('disabled', true)
+                        cropper = undefined
                     }
                 })
             })

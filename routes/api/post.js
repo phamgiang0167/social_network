@@ -9,7 +9,7 @@ const session = require('express-session');
 const multer  =   require('multer')
 const path = require("path");
 const fs = require("fs");
-const upload = multer({ dest: 'uploads/'});
+const upload = multer({ dest: 'public/images/'});
 app.use(bodyParser.urlencoded({ extended: false }));
 
 router.get("/", async (req, res, next) => {
@@ -43,7 +43,7 @@ router.post("/uploads/:id",upload.single('cropped'), async (req, res, next) => {
         console.log("No file uploaded with ajax request.");
         return res.sendStatus(400);
     }
-    var filePath = `/uploads/images/${req.file.filename}.png`;
+    var filePath = `public/images/${req.file.filename}.png`;
     var tempPath = req.file.path;
     var targetPath = path.join(__dirname, `../../${filePath}`);
 
@@ -52,7 +52,7 @@ router.post("/uploads/:id",upload.single('cropped'), async (req, res, next) => {
             console.log(error);
             return res.sendStatus(400);
         }
-        await Post.findByIdAndUpdate(req.params.id, { image: filePath }, { new: true });
+        await Post.findByIdAndUpdate(req.params.id, { image: `/images/${req.file.filename}.png` }, { new: true });
         var updated = await getPosts({ _id: req.params.id })
         updated  = updated [0]
         res.status(200).send(updated);
