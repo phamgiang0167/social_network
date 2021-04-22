@@ -16,7 +16,7 @@ class Database {
     }
 
     connect() {
-        mongoose.connect("mongodb+srv://admin:admin123456@socialnetworkcluster.tzl62.mongodb.net/SocialNetworkDB?retryWrites=true&w=majority")
+        mongoose.connect(process.env.mongodb_URI)
         .then(() => {
             console.log("database connection successful");
         })

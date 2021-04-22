@@ -1,6 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 const middleware = require('./middleware')
 const path = require('path')
 const bodyParser = require("body-parser")
@@ -9,11 +10,12 @@ const session = require("express-session")
 const server = app.listen(port, () => console.log("Server listening on port " + port));
 const passportSetup = require('./config/passport-setup')
 const passport = require('passport')
+const cors = require('cors')
 const io = require('socket.io')(server, {pingTimeout: 60000})
 //set view engine
 app.set("view engine", "pug");
 app.set("views", "views");
-
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(session({

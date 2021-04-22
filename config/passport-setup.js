@@ -1,6 +1,5 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const key = require('./key')
 const User = require('../schemas/UserSchema');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require("bcrypt");
@@ -34,9 +33,9 @@ passport.use(new LocalStrategy(
   }
 ))
 passport.use(new GoogleStrategy({
-    clientID:  key.google.clientID,
-    clientSecret: key.google.client_secret,
-    callbackURL: "https://socialnetworktdtu.herokuapp.com/auth/google/callback"
+    clientID:  process.env.clientID,
+    clientSecret: process.env.client_secret,
+    callbackURL: process.env.callbackURL
   },
   function(token, tokenSecret, profile, done) {
     if(profile._json.hd != 'student.tdtu.edu.vn'){
