@@ -720,7 +720,10 @@ button span{
 .resultsContainer{
     padding: var(--spacing);
 }
-/*Admin page*/
+.userItem:hover{
+    background-color: var(--spacing);
+}
+
 
 /*chat page*/
 .chatPageContainer {

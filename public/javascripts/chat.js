@@ -55,7 +55,7 @@ $("#userSearchTextbox").keydown((event) => {
 
 function createFoundUser(user, index){
     return `
-        <div class='header ${index}' style="border: 1px solid #D3D3D3; margin: 0; padding: 10px">
+        <div class='header userItem ${index}' style="border: 1px solid #D3D3D3; margin: 0; padding: 10px">
             <div class='userImageContainer'> 
                 <img src='${user.profilePic}'>
             </div>
