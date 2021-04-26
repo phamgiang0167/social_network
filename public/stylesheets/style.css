@@ -511,7 +511,7 @@ button span{
     padding: 5px 15px;
     border-radius: 60px ;
     display: inline-block;
-    margin-left: var(--spacing);
+    margin-top: var(--spacing);
 }
 
 .box .profileButton:hover {
@@ -847,11 +847,13 @@ button span{
     width: 100%;
     border: 1px solid transparent;
     padding: 0 5px;
+    font-weight: bold;
 }
 
 #chatName:hover {
-    border: 1px solid var(--lightGrey);
-    cursor: text;
+    background-color: var(--lightGrey);
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 .chatContainer {

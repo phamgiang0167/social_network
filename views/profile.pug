@@ -1,9 +1,7 @@
 extends layouts/main-layout.pug
 
 block content
-    .mainContainer
-        .titleContainer 
-            h1 #{pageTitle}
+    
     if !profileUser
         h1 User not found
     else
@@ -14,9 +12,6 @@ block content
                     if profileUser._id == userLoggedIn.id
                         button.profilePictureButton(data-toggle="modal" data-target="#imageProfileModal")
                             i.fas.fa-camera
-                if profileUser._id != userLoggedIn.id
-                    a.profileButton(href=`/message/${profileUser._id}`)
-                        i.fas.fa-envelope
                 table 
                     tr 
                         td 
@@ -53,4 +48,5 @@ block content
                                     a.fas.fa-pen-square
         +createImageProfile
 block scripts
-    script(src="/javascripts/profile.js") 
+    script(src="/javascripts/profile.js")
+    script(src="/javascripts/chat.js") 

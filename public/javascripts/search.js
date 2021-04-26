@@ -21,9 +21,6 @@ $("#searchBox").keydown((event) => {
                         </div>
                         <div style="display:flex; flex-direction:column">
                             <a href='/profile/${element.username}' class='displayName'>${element.displayName}</a>
-                            <a class="chat" href= "/message/${element._id}">
-                                <i class="fas fa-envelope"></i>    
-                            </a>
                         </div>
                     </div>
                     `)

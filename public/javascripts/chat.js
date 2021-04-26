@@ -61,9 +61,6 @@ function createFoundUser(user, index){
             </div>
             <div style="display:flex; flex-direction:column">
                 <p class='displayName'>${user.displayName}</p>
-                <a class="chat" href= "/message/${user._id}">
-                    <i class="fas fa-envelope"></i>    
-                </a>
             </div>
         </div>
     `
@@ -101,6 +98,6 @@ $('#createChatButton').on('click', (event) =>{
 
         if(!chat || !chat._id) return alert("Invalid response from server.");
 
-        window.location.href = `/messages/${chat._id}`;
+        window.location.href = `/messenger/${chat._id}`;
     })
 })
