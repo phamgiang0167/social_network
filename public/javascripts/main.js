@@ -205,12 +205,14 @@ $(document).on('click', '.item-office, .page-link', e =>{
     var button = e.target
     var data_id = $(button).data('id')
     pagination = $(button).data('page')
+
     $.ajax({
         url: '/api/notification/office/'+ data_id + "/" + `${pagination}`,
         type: "GET",
         success: (data)=>{
+            console.log(data)
             if($(button).attr('class') == "item-office"){
-                 swal("Success", "Selected " + data.user.displayName, "success");
+                 swal("Success", "Selected");
             }
            
             $('.listNotification').html('')
@@ -222,12 +224,10 @@ $(document).on('click', '.item-office, .page-link', e =>{
                         <div class='list-group-item'>
                             <div class='category'><i>[${e.category}]</i></div>
                             <div class='title'><a href="/notification/${e._id}" target="_blank">${e.title}</a></div>
-                            <div class='owner'><small>- posted by ${data.user.displayName}</small></div>
+                            <div class='owner'><small>- posted by ${e.postedBy.displayName}</small></div>
                         </div>
                     </div>
                 `)
-                
-                
             })
             fpagination(data, data_id)
             
@@ -236,6 +236,8 @@ $(document).on('click', '.item-office, .page-link', e =>{
     })
 })
 function fpagination(data, data_id){
+    console.log(data)
+    console.log(data_id)
     if(data.pages > 0){
         if(data.currentPage == 1){
             $('.pagination').append(`

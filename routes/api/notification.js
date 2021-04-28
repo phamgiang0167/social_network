@@ -18,49 +18,25 @@ router.get('/office/:id', async (req, res)=>{
     var results = await Notification.find({postedBy: req.params.id})
     return res.status(200).send(results)
 })
-// router.post('/:page', async (req, res)=>{
-//     var perPage = 3
-//     var page = req.params.page || 1
-
-//     await Notification.find({postedBy: req.params.id})
-//     .skip((perPage * page) - perPage)
-//     .limit(perPage)
-//     .exec((err, listNoti) => {
-//         Notification.countDocuments(async (err, count) => {
-//             if (err) return next(err)
-//             var user = await User.findOne({_id: req.params.id})
-//             var data = {
-//                 user: user,
-//                 listNoti: listNoti,
-//                 currentPage: page,
-//                 pages: Math.ceil(count / perPage)
-//             }
-            
-//             return res.status(200).send(data)
-//         })
-//       })
-// })
 router.get('/office/:id/:page', async (req, res)=>{
     var perPage = 3
     var page = req.params.page || 1
-
-    await Notification.find({postedBy: req.params.id})
+    var count = await Notification.find({postedBy: req.params.id})
+    var count = count.length
+    var data = await Notification.find({postedBy: req.params.id})
     .skip((perPage * page) - perPage)
     .limit(perPage)
+    .populate('postedBy')
     .exec((err, listNoti) => {
-        Notification.countDocuments(async (err, count) => {
-            if (err) return next(err)
-            var user = await User.findOne({_id: req.params.id})
-            var data = {
-                user: user,
-                listNoti: listNoti,
-                currentPage: page,
-                pages: Math.ceil(count / perPage)
-            }
+        var data = {
+            listNoti: listNoti,
+            currentPage: page,
+            pages: Math.ceil(count / perPage)
+        }
             
-            return res.status(200).send(data)
-        })
+        return res.status(200).send(data)
       })
+    
 })
 
 module.exports = router
