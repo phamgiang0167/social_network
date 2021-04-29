@@ -2,9 +2,17 @@ extends layouts/admin-layout.pug
 
 block content
     if userLoggedIn.role == 'admin'
-        .row.align-items-center.py-5
-            h3
-                | Admin page
+        .feature
+            .title
+                h3
+                    | Admin page
+            
+            .dropdown
+                button#dropdownMenuButton.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    | #{userLoggedIn.displayName}
+                .dropdown-menu(aria-labelledby='dropdownMenuButton')
+                    a.dropdown-item(href='/') Go to home page
+                    a.dropdown-item(href='/logout') logout
         .btn-group.my-3
             button.btn.btn-light.border(type='button' data-toggle="modal" data-target="#createAccountModal" )
                 i.fas.fa-folder-plus
@@ -17,9 +25,17 @@ block content
                 th Actions
             tbody
     if userLoggedIn.role == 'office'
-        .row.align-items-center.py-5
-            h3
-                #{userLoggedIn.displayName}
+        .feature
+            .title
+                h3
+                    | Office
+            
+            .dropdown
+                button#dropdownMenuButton.btn.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    | #{userLoggedIn.displayName}
+                .dropdown-menu(aria-labelledby='dropdownMenuButton')
+                    a.dropdown-item(href='/') Go to home page
+                    a.dropdown-item(href='/logout') logout
         .btn-group.my-3
             button.btn.btn-light.border(type='button' data-toggle="modal" data-target="#createNotificationModal" )
                 i.fas.fa-folder-plus

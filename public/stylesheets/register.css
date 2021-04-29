@@ -23,3 +23,20 @@ input[type="submit"] {
     border-radius: 2px;
     margin-bottom: 10px;
 }
+
+/*admin*/
+
+
+.feature{
+    display: flex;
+    padding-top: 50px;
+    align-items: center;
+    flex: 1;
+}
+.title{
+    width: 80%;
+}
+
+.dropdown{
+    right: 0;
+}

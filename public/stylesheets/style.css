@@ -1056,6 +1056,10 @@ button span{
 .resultListItem.notification * {
     pointer-events: none;
 }
+
+
+
+
 /*mobile*/
 @media only screen and (max-width: 768px) {
     .nav-btn{
