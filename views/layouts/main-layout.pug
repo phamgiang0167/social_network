@@ -14,7 +14,7 @@ html(lang="en")
     body
         script.
             var userLoggedIn =!{userLoggedInJs}
-       
+            
         .container-fluid
             .row.main
                 .topnav
@@ -98,15 +98,15 @@ html(lang="en")
                             i.fas.fa-times
                         .titleContainer
                             h1 Notification
-                        .list-group.listNotification
+                            span
+                                a.viewAll view all
+                        .listNotificationContainer
+                            .list-group.listNotification
                         .paginationContainer
                             nav.mx-auto 
                                 ul.pagination
-                                
-                                
-                        
-                        
-                        
+            .alert.alert-success.newNoti(role="alert" hidden)
+                |This is a warning alert—check it out!                         
         script(src='//cdn.jsdelivr.net/npm/sweetalert2@10')
         script(src="https://unpkg.com/sweetalert/dist/sweetalert.min.js")
         script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js")

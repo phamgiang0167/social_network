@@ -10,32 +10,52 @@ const session = require('express-session');
 const { findByIdAndUpdate } = require('../../schemas/UserSchema');
 app.use(bodyParser.urlencoded({ extended: false }));
 router.post('/', async (req, res)=>{
-    await Notification(req.body).save()
-    return res.status(200).send()
+    var noti = await Notification(req.body).save()
+    noti.postedBy = await User.findById(req.body.postedBy)
+    return res.status(200).send(noti)
 })
 
 router.get('/office/:id', async (req, res)=>{
     var results = await Notification.find({postedBy: req.params.id})
     return res.status(200).send(results)
 })
-router.get('/office/:id/:page', async (req, res)=>{
-    var perPage = 3
-    var page = req.params.page || 1
-    var count = await Notification.find({postedBy: req.params.id})
-    var count = count.length
-    var data = await Notification.find({postedBy: req.params.id})
-    .skip((perPage * page) - perPage)
-    .limit(perPage)
-    .populate('postedBy')
-    .exec((err, listNoti) => {
-        var data = {
-            listNoti: listNoti,
-            currentPage: page,
-            pages: Math.ceil(count / perPage)
-        }
-            
-        return res.status(200).send(data)
-      })
+router.get('/office', async (req, res)=>{
+    var perPage = 10
+    var page = req.query.page || 1
+    if(req.query.id && req.query.id != 'undefined'){
+        var count = await Notification.find({postedBy: req.query.id})
+        var count = count.length
+        var data = await Notification.find({postedBy: req.query.id})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .populate('postedBy')
+        .exec((err, listNoti) => {
+            var data = {
+                listNoti: listNoti,
+                currentPage: page,
+                pages: Math.ceil(count / perPage)
+            }
+                
+            return res.status(200).send(data)
+        })
+    }else{
+        var count = await Notification.find()
+        var count = count.length
+        var data = await Notification.find()
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .populate('postedBy')
+        .exec((err, listNoti) => {
+            var data = {
+                listNoti: listNoti,
+                currentPage: page,
+                pages: Math.ceil(count / perPage)
+            }
+                
+            return res.status(200).send(data)
+        })
+    }
+   
     
 })
 

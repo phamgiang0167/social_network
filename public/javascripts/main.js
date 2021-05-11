@@ -1,16 +1,23 @@
 $(document).ready(()=>{
-    var page = 0
-    $.get('/api/post', results=>{
-
-        // renderPosts(results.slice(page,3), $('.postsContainer'))
-        // page += 3
-        // $(window).scroll(()=>{
-        //     if($(window).scrollTop() + $(window).height() + 1 >= $(document).height()) {
-        //         renderPosts(results.slice(page,3), $('.postsContainer'))
-        //         page += 3
-        //     }
-        // })
+    $('.loadingSpinnerContainer').attr('style', 'display: block; text-align: center')
+    
+    var page = 1
+    $.get(`/api/post/${page}`, results=>{
+        $('.loadingSpinnerContainer').attr('style', 'display: none; text-align: center')
         renderPosts(results, $('.postsContainer'))
+    })
+
+    $(window).scroll(()=>{
+        if($(window).scrollTop() + $(window).height() + 1 >= $(document).height()) {
+            page+=1
+            $.ajax({
+                url: `/api/post/${page}`,
+                type: 'GET',
+                success: (results)=>{
+                    renderPosts(results, $('.postsContainer'))
+                }
+            })
+        }
     })
     $.get('/api/users/office', results =>{
         
@@ -69,9 +76,6 @@ function renderPosts(results, conatiner){
         conatiner.append(html)
 
     });
-    if(results == 0){
-        conatiner.append("<div class='noResult' style='text-align:center'><div style='display: inline-block'><img src='/images/empty-page.jpg'></div></div>")
-    }
 }
 
 //function render a post
@@ -201,39 +205,46 @@ function createPostHtml(postData){
 }
 
 var pagination = 1
-$(document).on('click', '.item-office, .page-link', e =>{
+$(document).on('click', '.item-office, .page-link, .viewAll', e =>{
+
     var button = e.target
+    
     var data_id = $(button).data('id')
     pagination = $(button).data('page')
 
+    if($(button).attr('class') != 'viewAll' || data_id != undefined){
+        var data = {
+            id : data_id,
+            page: pagination
+        }
+    }else{
+        data = {
+            page: pagination
+        }
+    }
     $.ajax({
-        url: '/api/notification/office/'+ data_id + "/" + `${pagination}`,
+        url: '/api/notification/office/',
         type: "GET",
+        data: data,
         success: (data)=>{
-            console.log(data)
             if($(button).attr('class') == "item-office"){
-                 swal("Success", "Selected");
+                 swal("Success", "Office Selected");
             }
-           
+            if($(button).attr('class') == "viewAll"){
+                swal("Success", "View all notification");
+            }
             $('.listNotification').html('')
             $('.pagination').html('')
             data.listNoti.forEach(e=>{
                 // render list notification
-                $('.listNotification').append(`
-                    <div class='list-group'>
-                        <div class='list-group-item'>
-                            <div class='category'><i>[${e.category}]</i></div>
-                            <div class='title'><a href="/notification/${e._id}" target="_blank">${e.title}</a></div>
-                            <div class='owner'><small>- posted by ${e.postedBy.displayName}</small></div>
-                        </div>
-                    </div>
-                `)
+                itemNoti(e)
             })
             fpagination(data, data_id)
             
             
         }
     })
+    
 })
 function fpagination(data, data_id){
     console.log(data)
@@ -298,6 +309,18 @@ function fpagination(data, data_id){
     }
 }
 
+function itemNoti(e){
+    $('.listNotification').append(`
+        <div class='list-group'>
+            <div class='list-group-item'>
+                <div class='category'><i>[${e.category}]</i></div>
+                <div class='title'><a href="/notification/${e._id}" target="_blank">${e.title}</a></div>
+                <div class='owner'><small>- posted by ${e.postedBy.displayName}</small></div>
+            </div>
+        </div>
+    `)
+}
+
 function getChatName(chatData){
     var chatName = chatData.chatName
     if(!chatName){
@@ -328,6 +351,20 @@ function messageRecieved(newMessage){
 
 function addVideoHtml(codeYoutube){
     return `<iframe width="100%" height="315" src="https://www.youtube.com/embed/${codeYoutube}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>`
+}
+
+function onNotification(noti){
+    var html = `<p>${noti.postedBy.displayName} just posted a new notification<p>
+            <a href="/notification/${noti._id}" style="text-decoration: underline; color:orange">view it</a>
+        `
+    $('.newNoti').html(html)
+    $('.newNoti').removeAttr('hidden')
+    setTimeout(() =>{
+        $('.newNoti').attr('hidden','true')
+        
+    },5000)
+    
+    
 }
 
 

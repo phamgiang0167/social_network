@@ -1,0 +1,39 @@
+doctype html
+head
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
+// Top navigation
+
+nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
+  a.navbar-brand(href='../index.php')
+    img.d-inline-block.align-top.rounded-circle(src='https://upload.wikimedia.org/wikipedia/vi/1/1b/T%C4%90T_logo.png' width='30' height='30' alt='')
+    |       T&ocirc;n &Dstrok;&#x1EE9;c Th&#x1EAF;ng University
+  
+.container.py-5
+  // Tiêu Đề
+  .row
+    .col-lg-8.text-blue.py-4.text-center.mx-auto
+      h1.display-4 #{noti.title}
+      h3.lead.mb-0 #{noti.category}
+  // End
+  .bg-white.rounded.shadow.m-auto
+    // Các tab trong thongbao
+    // Nội Dung tab
+    #myTabContent.tab-content
+      #Class1.tab-pane.fade.px-4.py-5.show.active(role='tabpanel' aria-labelledby='home-tab')
+        .p-2.panel.panel-default.border.m-4.rounded.position-relative
+          .panel-heading
+            p.pull-left.font-weight-bold
+            div
+              img.rounded-circle(src=noti.postedBy.profilePic width='40px' height='40px' style="margin-right:10px")
+              | #{noti.postedBy.displayName}
+          .panel-body
+            .post-content.mx-3.border-bottom.rounded.mt-3
+              p.px-4
+                | #{noti.content}
+        p.p-2(style='color:blue; float:right')
+              | Created at: #{noti.createdAt}

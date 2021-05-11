@@ -12,6 +12,8 @@ const passportSetup = require('./config/passport-setup')
 const passport = require('passport')
 const cors = require('cors')
 const io = require('socket.io')(server, {pingTimeout: 60000})
+const Notification = require('./schemas/NotificationSchema')
+const User = require('./schemas/UserSchema')
 //set view engine
 app.set("view engine", "pug");
 app.set("views", "views");
@@ -78,7 +80,15 @@ app.get('/manage',  (req, res)=>{
     }
     res.status(200).render('manage', payload)
 })
-
+app.get('/notification/:id', async (req, res)=>{
+    Notification.findById(req.params.id)
+    .populate('postedBy')
+    .then(result =>{
+        console.log(result)
+        return res.render('notification', {noti: result})
+    })
+    
+})
 io.on('connection', (socket)=>{
     socket.on('setup', userData =>{
         socket.join(userData._id)
@@ -101,4 +111,8 @@ io.on('connection', (socket)=>{
             socket.in(user._id).emit('message recieved', newMessage)
         });
     })
+    socket.on('notification recevied', noti =>{
+        socket.broadcast.emit('new noti', noti)
+    })
+    
 })
