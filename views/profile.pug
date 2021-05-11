@@ -5,6 +5,8 @@ block content
     if !profileUser
         h1 User not found
     else
+        script.
+            var profile = '!{profileUser._id}'
         .coverImage
             .box
                 .userImageContainer
@@ -32,21 +34,25 @@ block content
                                 h3#profileClass #{profileUser.class}
                         td 
                             if profileUser._id == userLoggedIn.id
-                                .controlInfo#editName(data-id= userLoggedIn.id)
+                                .controlInfo#editClass(data-id= userLoggedIn.id)
                                     a.fas.fa-pen-square
                     tr 
                         td 
                             a.fas.fa-building(aria-hidden="true")
                         td 
-                            if !profileUser.falcuty
-                                h3#profileFalcuty You do not belong to any falcuty
+                            if !profileUser.faculty
+                                h3#profileFalcuty You do not belong to any faculty
                             else 
                                 h3#profileFalcuty #{profileUser.faculty}
                         td 
                             if profileUser._id == userLoggedIn.id
-                                .controlInfo#editName(data-id= userLoggedIn.id)
+                                .controlInfo#editFaculty(data-id= userLoggedIn.id)
                                     a.fas.fa-pen-square
         +createImageProfile
+        .profilePostsContainer
+        +commentModal(userLoggedIn)
 block scripts
     script(src="/javascripts/profile.js")
     script(src="/javascripts/chat.js") 
+    script(src="/javascripts/post.js")
+    

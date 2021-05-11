@@ -12,11 +12,27 @@ const fs = require("fs");
 const upload = multer({ dest: 'public/images/'});
 app.use(bodyParser.urlencoded({ extended: false }));
 
-router.get("/", async (req, res, next) => {
-    var results = await getPosts({});
+router.get("/:page", async (req, res, next) => {
+    
+    var results = await getPosts({}, req.params.page)
     res.status(200).send(results)
 })
-
+router.get("/", async (req, res, next) => {
+    
+    var results = await Post.find({postedBy: req.query.postedBy})
+    .populate("postedBy")
+    .populate({
+        path: "comments", 
+        populate: {
+            path: "commentedBy"
+        } 
+    })
+    .sort({ 
+        "createdAt": -1,
+    })
+    .catch(error => console.log(error))
+    res.status(200).send(results)
+})
 router.post("/", async (req, res, next) => {
     
     if (!req.body.content) {
@@ -155,8 +171,11 @@ async function getCommentsOnPost(filter){
     return comments
 }
 
-async function getPosts(filter) {
+async function getPosts(filter, page) {
+    var perPage = 10
     var results = await Post.find(filter)
+    .skip((page*perPage) - perPage)
+    .limit(perPage)
     .populate("postedBy")
     .populate({
         path: "comments", 

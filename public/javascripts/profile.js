@@ -1,5 +1,13 @@
 
-
+$(document).ready(()=>{
+    loadPosts()
+})
+function loadPosts(){
+    $.get('/api/post', {postedBy: profile}, results =>{
+        
+        renderPosts(results, $('.profilePostsContainer'))
+    })
+}
 var cropper
 $('#userPhoto').change(function(){
     $('#imageProfileButton').removeAttr('disabled')
@@ -92,8 +100,34 @@ $('#editClass').click(e=>{
                 type: "PUT",
                 data: data,
                 success: ()=>{
-                    swal('Renamed successfully')
+                    swal('Reclass successfully')
                     $('#profileClass').html(value)
+                }
+            })
+        }
+        
+    });
+})
+
+$('#editFaculty').click(e=>{
+    var idUser = $('#editClass').attr('data-id')
+    swal("Change your class:", {
+        content: "input",
+    })
+    .then((value) => {
+        if(value == ""){
+            swal('Your class has not changed yet')
+        }else{
+            var data = {
+                newFaculty: value
+            }
+            $.ajax({
+                url: "/api/users/" + idUser,
+                type: "PUT",
+                data: data,
+                success: ()=>{
+                    swal('ReFaculty successfully')
+                    $('#profileFalcuty').html(value)
                 }
             })
         }

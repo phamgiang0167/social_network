@@ -40,7 +40,7 @@ async function getPayload(username, userLoggedIn) {
     }
 
     return {
-        pageTitle: user.username,
+        pageTitle: "Profile",
         userLoggedIn: userLoggedIn,
         userLoggedInJs: JSON.stringify(userLoggedIn),
         profileUser: user
