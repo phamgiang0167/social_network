@@ -28,30 +28,32 @@ router.get('/office', async (req, res)=>{
         var data = await Notification.find({postedBy: req.query.id})
         .skip((perPage * page) - perPage)
         .limit(perPage)
-        .populate('postedBy')
+        .sort({ 
+            "createdAt": -1,
+        })
         .exec((err, listNoti) => {
             var data = {
                 listNoti: listNoti,
                 currentPage: page,
                 pages: Math.ceil(count / perPage)
             }
-                
             return res.status(200).send(data)
         })
     }else{
-        var count = await Notification.find()
+        var count = await Notification.find({})
         var count = count.length
-        var data = await Notification.find()
+        var data = await Notification.find({})
         .skip((perPage * page) - perPage)
         .limit(perPage)
-        .populate('postedBy')
+        .sort({ 
+            "createdAt": -1,
+        })
         .exec((err, listNoti) => {
             var data = {
                 listNoti: listNoti,
                 currentPage: page,
                 pages: Math.ceil(count / perPage)
             }
-                
             return res.status(200).send(data)
         })
     }

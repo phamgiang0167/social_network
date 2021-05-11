@@ -235,6 +235,7 @@ $(document).on('click', '.item-office, .page-link, .viewAll', e =>{
             }
             $('.listNotification').html('')
             $('.pagination').html('')
+            console.log(data)
             data.listNoti.forEach(e=>{
                 // render list notification
                 itemNoti(e)
@@ -310,6 +311,13 @@ function fpagination(data, data_id){
 }
 
 function itemNoti(e){
+    $.ajax({
+        url: `/api/users/${e.postedBy}`,
+        type: "GET",
+        success: (data)=>{
+            e.postedBy = data
+        }
+    })
     $('.listNotification').append(`
         <div class='list-group'>
             <div class='list-group-item'>
@@ -355,7 +363,7 @@ function addVideoHtml(codeYoutube){
 
 function onNotification(noti){
     var html = `<p>${noti.postedBy.displayName} just posted a new notification<p>
-            <a href="/notification/${noti._id}" style="text-decoration: underline; color:orange">view it</a>
+            <a href="/notification/${noti._id}" style="text-decoration: underline; color:0orange">view it</a>
         `
     $('.newNoti').html(html)
     $('.newNoti').removeAttr('hidden')
