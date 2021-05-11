@@ -40,11 +40,16 @@ router.put('/:idUser', async (req,res)=>{
             if(err) throw err
         })
     }else if(req.body.newClass){
-        option = 'class'
         value = req.body.newClass
+        await User.findByIdAndUpdate(req.params.idUser, {class: value}, (err, user)=>{
+            if(err) throw err
+        })
     }else{
-        option = 'falculty'
-        value = req.body.newFalculty
+        console.log('a')
+        value = req.body.newFaculty
+        await User.findByIdAndUpdate(req.params.idUser, {faculty: value}, (err, user)=>{
+            if(err) throw err
+        })
     }
     return res.status(200).send()
 })

@@ -46,6 +46,7 @@ $("#chatNameButton").click(() => {
 }) 
 
 $('.sendMessageButton').click(()=>{
+    
     messageSubmitted()
 })
 $('.inputTextbox').keydown((event)=>{

@@ -47,24 +47,46 @@ $('#commentTextArea').keyup((event)=>{
 
 //upload photo
 var cropper
-$('#postPhoto').change(function(){
-    if(this.files && this.files[0]){
-        var reader = new FileReader()
-        reader.onload = (e)=>{
-            var image = document.getElementById('imagePreview')
-            image.src = e.target.result
-            $('.imagePreviewContainer').attr('style', 'display:inline-block')
-            $('#imagePreview').attr('src', e.target.result)
-            if(cropper !== undefined){
-                cropper.destroy()
+$('#postPhoto, #editPostContentPostPhoto').change(function(event){
+    var button = event.target
+    if($(button).attr('id') == 'postPhoto'){
+        if(this.files && this.files[0]){
+            var reader = new FileReader()
+            reader.onload = (e)=>{
+                var image = document.getElementById('imagePreview')
+                image.src = e.target.result
+                $('.imagePreviewContainer').attr('style', 'display:inline-block')
+                $('#imagePreview').attr('src', e.target.result)
+                if(cropper !== undefined){
+                    cropper.destroy()
+                }
+                cropper = new Cropper(image, {
+                    aspectRatio: 482/400,
+                    background: false
+                })
             }
-            cropper = new Cropper(image, {
-                aspectRatio: 482/400,
-                background: false
-            })
+            reader.readAsDataURL(this.files[0])
         }
-        reader.readAsDataURL(this.files[0])
+    }else{
+        if(this.files && this.files[0]){
+            var reader = new FileReader()
+            reader.onload = (e)=>{
+                var image = document.getElementById('editPostContentImagePreview')
+                image.src = e.target.result
+                $('.imagePreviewContainer').attr('style', 'display:inline-block')
+                $('#editPostContentImagePreview').attr('src', e.target.result)
+                if(cropper !== undefined){
+                    cropper.destroy()
+                }
+                cropper = new Cropper(image, {
+                    aspectRatio: 482/400,
+                    background: false
+                })
+            }
+            reader.readAsDataURL(this.files[0])
+        }
     }
+    
 
 })
 
@@ -144,7 +166,7 @@ $('#submitEditPostButton').click(()=>{
     }
     if(cropper == undefined){
         $.post('/api/post/', data, (postData, status, xhr)=>{
-            console.log(postData)
+            
             $('#editPostContentModal').modal('hide')
             swal("Edit successfully")
             var post = $(`#${postId}`)
@@ -153,10 +175,14 @@ $('#submitEditPostButton').click(()=>{
             if(postData.content.search('https://www.youtube.com/') != (-1)){
                 codeYoutube = postData.content.split("https://www.youtube.com/watch?v=")[1].split(' ')[0]
                 content = content.replace('https://www.youtube.com/watch?v=' + codeYoutube,'')
+                var htmlYoutube = addVideoHtml(codeYoutube)
+                post.find('.videoPostContainer').html(htmlYoutube)
+            }else{
+                post.find('.videoPostContainer').html('')
             }
+            
             post.find('.content').html(`${content}`)
-            var htmlYoutube = addVideoHtml(codeYoutube)
-            post.find('.videoPostContainer').html(htmlYoutube)
+            
         })
     }else{
         $.post('/api/post', data, (postData, status, xhr)=>{

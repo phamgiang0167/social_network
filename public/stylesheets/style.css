@@ -1057,11 +1057,26 @@ button span{
     pointer-events: none;
 }
 
+.newNoti{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 100px;
+    width: 25%;
+    text-align: center;
+    align-items: center;
+}
 
-
-
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
 /*mobile*/
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1023px) {
     .nav-btn{
         display: block;
     }
@@ -1084,18 +1099,13 @@ button span{
     .listFacultyContainer{
         height: 80vh;
     }
-}
-@keyframes fadeIn {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
+    .newNoti{
+        width: 75%;
     }
 }
 
 /*Pc*/
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 1024px) {
     .mainSectionContainer {
         width: 50%;
         margin-left: 25%;

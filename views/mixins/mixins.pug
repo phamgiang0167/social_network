@@ -197,6 +197,23 @@ mixin createAccount()
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                     button#createAccountButton.btn.btn-primary(type='button' ) Register
 
+mixin editAccount()
+    #editAccountModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#editAccountModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#editAccountModal.modal-title Edit a account
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    .wrapper
+                        input#editName(type="text", name="displayName", placeholder="name", value="" required="")
+                        input#editUsername(type="text", name="username", placeholder="Username", value="" required="")
+                        input#editPassword(type="password", name="password", placeholder="Password", required="")
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button#editAccountButton.btn.btn-primary(type='button') Change
+
 mixin createNotification() 
     #createNotificationModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#createNotificationModalLabel', aria-hidden='true')
         .modal-dialog(role='document')

@@ -1,5 +1,6 @@
 
 
+
 $(document).ready(()=>{
     if(userLoggedIn.role == 'admin'){
         $.get('/api/office', results=>{
@@ -13,7 +14,7 @@ $(document).ready(()=>{
                 cell1.innerHTML = element.displayName
                 cell2.innerHTML = element.username
                 cell3.innerHTML = `<a href="#" class="chooseAcces" data-toggle="modal" data-target="#chooseAccessModal" data-id=${element._id}>choose</a>`
-                cell4.innerHTML = `<span><i class="fas fa-user-slash"></i>&nbsp&nbsp</span><span><i class="fas fa-user-edit"></i></span>`
+                cell4.innerHTML = `<span class='editUserManage' data-toggle="modal" data-target="#editAccountModal"  data-id=${element._id}><i class="fas fa-user-slash"></i>&nbsp&nbsp</span > <span class='deleteUserManage'"><i data-id=${element._id} class="fas fa-user-edit"></i></span>`
             });
         })
     }else{
@@ -25,7 +26,7 @@ $(document).ready(()=>{
                 var cell2 = row.insertCell(1)
                 var cell3 = row.insertCell(2)
                 var cell4 = row.insertCell(3)
-                cell1.innerHTML = `<a href="/${element._id}">${element.title}</a>`
+                cell1.innerHTML = `<a href="/notification/${element._id}">${element.title}</a>`
                 cell2.innerHTML = element.category
                 cell3.innerHTML = element.createdAt
                 cell4.innerHTML = `<span><i class="fas fa-user-slash"></i>&nbsp&nbsp</span><span><i class="fas fa-user-edit"></i></span>`
@@ -55,16 +56,7 @@ $('#createAccountButton').click(()=>{
         data : data,
 
         success: (newUser) =>{
-            var table = document.getElementById("accountTable")
-            var row = table.insertRow(1)
-            var cell1 = row.insertCell(0)
-            var cell2 = row.insertCell(1)
-            var cell3 = row.insertCell(2)
-            var cell4 = row.insertCell(3)
-            cell1.innerHTML = newUser.displayName
-            cell2.innerHTML = newUser.username
-            cell3.innerHTML = `<a href="#" data-toggle="modal" data-target="#chooseAccessModal" data-id=${newUser._id}>choose</a>`
-            cell4.innerHTML = `<span><i class="fas fa-user-slash"></i></span>&nbsp&nbsp<span><i class="fas fa-user-edit"></i></span>`
+            location.reload()
         }
     })
 })
@@ -117,7 +109,9 @@ $('#chooseAccessButton').click(()=>{
         type: 'PUT',
         data: data,
         success: ()=>{
+
             $("#chooseAccessModal").modal('hide')
+            
         }
     })
     
@@ -146,9 +140,73 @@ $('#createNotificationButton').on('click', e=>{
         url: '/api/notification/',
         type: "POST",
         data: data,
-        success: ()=>{
-            location.reload()
+        success: (noti)=>{
+            console.log(noti)
+            
             $("#createNotificationModal").modal('hide')
+            emitNotification(noti)
+            location.reload()
         }
     })
+})
+
+$(document).on('click', '.deleteUserManage', (event)=>{
+    var button = event.target
+    var id = $(button).data('id')
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this user",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) { 
+            swal("Poof! This user has been deleted!", {
+                icon: "success",
+            });
+            $.ajax({
+            url: `/api/office/${id}`,
+            type: 'DELETE',
+            success: ()=>{
+                location.reload()
+            }
+        })
+        } else {
+          swal("Nothing happened");
+        }
+      });
+   
+})
+
+$("#editAccountModal").on("show.bs.modal", async (event) => {
+    var button = event.relatedTarget
+    var id = $(button).data('id')
+    $('#editAccountButton').data('id', id)
+})
+
+$("#editAccountButton").on("click", async (event) => {
+    var button = event.target
+    var id = $(button).data('id')
+    console.log($('#editName').val())
+    var data = {
+        name: $('#editName').val(),
+        username: $('#editUsername').val(),
+        password: $('#editPassword').val(),
+    }
+    if(data.name == "" ||
+    data.username == "" ||
+    data.password == ""){
+        swal('you missed some field')
+    }else{
+        $.ajax({
+        url: `/api/office/${id}`,
+        type: 'PUT',
+        data: data,
+        success: ()=>{
+            location.reload()
+        }
+    })
+    }
+    
 })
