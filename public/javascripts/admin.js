@@ -14,7 +14,7 @@ $(document).ready(()=>{
                 cell1.innerHTML = element.displayName
                 cell2.innerHTML = element.username
                 cell3.innerHTML = `<a href="#" class="chooseAcces" data-toggle="modal" data-target="#chooseAccessModal" data-id=${element._id}>choose</a>`
-                cell4.innerHTML = `<span class='editUserManage' data-toggle="modal" data-target="#editAccountModal"  data-id=${element._id}><i class="fas fa-user-edit"></i>&nbsp&nbsp</span > <span class='deleteUserManage'"><i data-id=${element._id} class="fas fa-user-slash"></i></span>`
+                cell4.innerHTML = `<span class='editUserManage' data-toggle="modal" data-target="#editAccountModal"  data-id=${element._id}><i class="fas fa-user-edit"></i>&nbsp&nbsp</span > <span class='deleteUserManage'><i data-id=${element._id} class="fas fa-user-slash"></i></span>`
             });
         })
     }else{
@@ -29,7 +29,7 @@ $(document).ready(()=>{
                 cell1.innerHTML = `<a href="/notification/${element._id}">${element.title}</a>`
                 cell2.innerHTML = element.category
                 cell3.innerHTML = element.createdAt
-                cell4.innerHTML = `<span><i class="fas fa-user-slash"></i>&nbsp&nbsp</span><span><i class="fas fa-user-edit"></i></span>`
+                cell4.innerHTML = `<span class='deleteNoti'><i class="fas fa-trash-alt" data-id=${element._id}></i>&nbsp&nbsp</span><span data-toggle="modal" data-target="#editNotificationModal" class='editNoti' data-id=${element._id}><i class="fas fa-edit"></i></span>`
             })
            
         })
@@ -133,7 +133,7 @@ $('#createNotificationButton').on('click', e=>{
     var data = {
         title: $('#titleNotification').val(),
         content: $('#contentNotification').val(),
-        category: $('#access option:selected').text(),
+        category: $('.access option:selected').text(),
         postedBy: userLoggedIn._id
     }
     $.ajax({
@@ -184,7 +184,17 @@ $("#editAccountModal").on("show.bs.modal", async (event) => {
     var id = $(button).data('id')
     $('#editAccountButton').data('id', id)
 })
-
+$("#editNotificationModal").on("show.bs.modal", async (event) => {
+    var listAccess = userLoggedIn.access
+    var modal = event.target 
+    var select = document.getElementById('accessEditNoti')
+    listAccess.forEach(e =>{
+        $(select).append(`<option value="${e}">${e}</option>`)
+    })
+    var button = event.relatedTarget
+    var id = $(button).data('id')
+    $('#editNotificationButton').data('id', id)
+})
 $("#editAccountButton").on("click", async (event) => {
     var button = event.target
     var id = $(button).data('id')
@@ -201,6 +211,61 @@ $("#editAccountButton").on("click", async (event) => {
     }else{
         $.ajax({
         url: `/api/office/${id}`,
+        type: 'PUT',
+        data: data,
+        success: ()=>{
+            location.reload()
+        }
+    })
+    }
+    
+})
+
+$(document).on('click', '.deleteNoti', (event)=>{
+    var button = event.target
+    var id = $(button).data('id')
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this notification",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) { 
+            swal("Poof! This user has been deleted!", {
+                icon: "success",
+            });
+            $.ajax({
+            url: `/api/notification/${id}`,
+            type: 'DELETE',
+            success: ()=>{
+                location.reload()
+            }
+        })
+        } else {
+          swal("Nothing happened");
+        }
+      });
+   
+})
+
+$("#editNotificationButton").on("click", async (event) => {
+    var button = event.target
+    console.log(button)
+    var id = $(button).data('id')
+    var data = {
+        title: $('#editTitleNotification').val(),
+        content: $('#editContentNotification').val(),
+        category: $('#accessEditNoti option:selected').text(),
+    }
+    if(data.title == "" ||
+    data.content == "" ||
+    data.category == ""){
+        swal('you missed some field')
+    }else{
+        $.ajax({
+        url: `/api/notification/${id}`,
         type: 'PUT',
         data: data,
         success: ()=>{

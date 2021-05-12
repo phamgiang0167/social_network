@@ -60,5 +60,17 @@ router.get('/office', async (req, res)=>{
    
     
 })
+router.delete('/:id', async (req, res)=>{
+    await Notification.findByIdAndDelete(req.params.id)
+    return res.sendStatus(200)
+})
 
+router.put('/:id', async (req, res)=>{
+    var {title, content, category }= req.body
+    console.log(req.body)
+    Notification.findByIdAndUpdate(req.params.id, {title: title, content: content, category: category}, (err, notification)=>{
+        if(err) throw err
+    })
+    return res.sendStatus(200)
+})
 module.exports = router

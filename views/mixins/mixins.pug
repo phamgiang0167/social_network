@@ -231,7 +231,23 @@ mixin createNotification()
                 .modal-footer
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                     button#createNotificationButton.btn.btn-primary(type='button' ) Post
-
+mixin editNotification() 
+    #editNotificationModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='#editNotificationModalLabel', aria-hidden='true')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5#editNotificationModal.modal-title Edit a notification
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    .wrapper
+                        input#editTitleNotification(type="text", name="displayName", placeholder="Title", value="" required="")
+                        textarea#editContentNotification( cols="30", rows="10" type="text" name="content", placeholder="Content", value="" required="")
+                        select#accessEditNoti(name='access')
+                            
+                .modal-footer
+                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                    button#editNotificationButton.btn.btn-primary(type='button' ) Edit
 mixin createTab(name, href, isSelected)
     - className = isSelected ? "tab active" : "tab"
     a(href=href, class=className)
