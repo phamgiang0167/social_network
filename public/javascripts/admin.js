@@ -14,7 +14,7 @@ $(document).ready(()=>{
                 cell1.innerHTML = element.displayName
                 cell2.innerHTML = element.username
                 cell3.innerHTML = `<a href="#" class="chooseAcces" data-toggle="modal" data-target="#chooseAccessModal" data-id=${element._id}>choose</a>`
-                cell4.innerHTML = `<span class='editUserManage' data-toggle="modal" data-target="#editAccountModal"  data-id=${element._id}><i class="fas fa-user-slash"></i>&nbsp&nbsp</span > <span class='deleteUserManage'"><i data-id=${element._id} class="fas fa-user-edit"></i></span>`
+                cell4.innerHTML = `<span class='editUserManage' data-toggle="modal" data-target="#editAccountModal"  data-id=${element._id}><i class="fas fa-user-edit"></i>&nbsp&nbsp</span > <span class='deleteUserManage'"><i data-id=${element._id} class="fas fa-user-slash"></i></span>`
             });
         })
     }else{
